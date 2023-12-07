@@ -1,19 +1,20 @@
+import javax.swing.ImageIcon;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
 public class ModeleMorpion {
 	
-	private static int screenWidth, screenHeight;
-	private static Joueur joueur = Joueur.O;
+	private static int ecranLargeur, ecranHauteur; // Dimensions de l'écran
+	private static Joueur joueur = Joueur.O;	   // Joueur actif
 	
 	
-	// Jeu
-	public static boolean checkWin(BoutonMorpion[] grille, int boutonPos) {
+	/// JEU \\\
+	// Check si le joueur a gagné en fonction du bouton qu'il vient de cliquer
+	public static boolean checkVictoire(BoutonMorpion[] grille, int boutonPos) {
 		boolean win = false;
 		
+		// En fonction de quel bouton vient d'être cliqué, check les possibilités des wins possibles
 		switch(boutonPos) {
 			case 0:				
 				     if(grille[1].getJoueur() == ModeleMorpion.joueur && grille[2].getJoueur() == ModeleMorpion.joueur) win = true; //top lane
@@ -67,29 +68,22 @@ public class ModeleMorpion {
 				break;
 		}
 		return win;
-	}
-	
-	
-	public static void victoire(Joueur j) {
-		System.out.println("PARTIE GAGNÉE PAR LE JOUEUR " + j.toString());
-	}
+	}	
 	
 	
 	
-	// Joueur
+	/// JOUEUR \\\
+	// Renvoie le joueur
 	public static Joueur getJoueur() {
 		return joueur;
 	}
 	
+	// Passe au joueur suivant
 	public static void nextJoueur() {
-		if(joueur == Joueur.O) {
-			joueur = Joueur.X;
-		} else {
-			joueur = Joueur.O;
-		}
+		joueur = (joueur == Joueur.O) ? Joueur.X: Joueur.O; // Si le joueur actuel est O, on passe à X et inversement
 	}
 	
-	
+	// Renvoie l'icon correspondant au joueur j
 	public static ImageIcon getIconJoueur(Joueur j) {
 		switch(j) {
 			case O:
@@ -105,77 +99,79 @@ public class ModeleMorpion {
 	
 	
 	
-	// Ecran
-	public static void getScreenSize() {
+	/// ECRAN \\\
+	// Renvoie les dimensions de l'écran
+	public static void getTailleEcran() {
 		Dimension size = Toolkit.getDefaultToolkit().getScreenSize(); 
 	    
-		ModeleMorpion.screenWidth  = (int)size.getWidth(); 
-		ModeleMorpion.screenHeight = (int)size.getHeight(); 
+		ModeleMorpion.ecranLargeur = (int)size.getWidth(); 
+		ModeleMorpion.ecranHauteur = (int)size.getHeight(); 
 	}
 	
+	// Renvoie les positions des fenêtre ainsi que leur titre
 	public static Object[] getInfos(int pos) {
 		Object[] infos = new Object[3];
 		
 		switch(pos) {
 			case 0:
-				infos[0] = screenWidth/2  - 450;
-				infos[1] = screenHeight/2 - 456;
+				infos[0] = ecranLargeur/2 - 450;
+				infos[1] = ecranHauteur/2 - 456;
 				
 				infos[2] = "T";
 				break;
 				
 			case 1:
-				infos[0] = screenWidth/2  - 150;
-				infos[1] = screenHeight/2 - 456;
+				infos[0] = ecranLargeur/2 - 150;
+				infos[1] = ecranHauteur/2 - 456;
 				
 				infos[2] = "I";
 				break;
 				
 			case 2:
-				infos[0] = screenWidth/2  + 150;
-				infos[1] = screenHeight/2 - 456;
+				infos[0] = ecranLargeur/2 + 150;
+				infos[1] = ecranHauteur/2 - 456;
 				
 				infos[2] = "C";
 				break;
 				
 			case 3:
-				infos[0] = screenWidth/2  - 450;
-				infos[1] = screenHeight/2 - 150;
+				infos[0] = ecranLargeur/2 - 450;
+				infos[1] = ecranHauteur/2 - 150;
 				
 				infos[2] = "T";
 				break;
 				
 			case 4:
-				infos[0] = screenWidth/2  - 150;
-				infos[1] = screenHeight/2 - 150;
+				infos[0] = ecranLargeur/2 - 150;
+				infos[1] = ecranHauteur/2 - 150;
 				
 				infos[2] = "A";
 				break;
 				
 			case 5:
-				infos[0] = screenWidth/2  + 150;
-				infos[1] = screenHeight/2 - 150;
+				infos[0] = ecranLargeur/2 + 150;
+				infos[1] = ecranHauteur/2 - 150;
 				
 				infos[2] = "C";
 				break;
 				
 			case 6:
-				infos[0] = screenWidth/2  - 450;
-				infos[1] = screenHeight/2 + 156;
+				infos[0] = ecranLargeur/2 - 450;
+				infos[1] = ecranHauteur/2 + 156;
 				
 				infos[2] = "T";
 				break;
 				
 			case 7:
-				infos[0] = screenWidth/2  - 150;
-				infos[1] = screenHeight/2 + 156;
+				infos[0] = ecranLargeur/2 - 150;
+				infos[1] = ecranHauteur/2 + 156;
 				
 				infos[2] = "O";
 				break;
 				
 			case 8:
-				infos[0] = screenWidth/2  + 150;
-				infos[1] = screenHeight/2 + 156;
+				infos[0] = ecranLargeur/2 + 150;
+				infos[1] = ecranHauteur/2 + 156;
 				
 				infos[2] = "E";
 				break;
@@ -189,5 +185,4 @@ public class ModeleMorpion {
 		
 		return infos;
 	}
-	
 }
