@@ -12,63 +12,68 @@ public class ModeleMorpion {
 	/// JEU \\\
 	// Check si le joueur a gagné en fonction du bouton qu'il vient de cliquer
 	public static boolean checkVictoire(BoutonMorpion[] grille, int boutonPos) {
-		boolean win = false;
-		
-		// En fonction de quel bouton vient d'être cliqué, check les possibilités des wins possibles
-		switch(boutonPos) {
-			case 0:				
-				     if(grille[1].getJoueur() == ModeleMorpion.joueur && grille[2].getJoueur() == ModeleMorpion.joueur) win = true; //top lane
-				else if(grille[3].getJoueur() == ModeleMorpion.joueur && grille[6].getJoueur() == ModeleMorpion.joueur) win = true; //left col
-				else if(grille[4].getJoueur() == ModeleMorpion.joueur && grille[8].getJoueur() == ModeleMorpion.joueur) win = true; //antislash				     
-				break;
-				
-			case 1:
-			    	 if(grille[0].getJoueur() == ModeleMorpion.joueur && grille[2].getJoueur() == ModeleMorpion.joueur) win = true; //top lane
-				else if(grille[4].getJoueur() == ModeleMorpion.joueur && grille[7].getJoueur() == ModeleMorpion.joueur) win = true; //mid col   
-				break;
-				
-			case 2:
-				     if(grille[0].getJoueur() == ModeleMorpion.joueur && grille[1].getJoueur() == ModeleMorpion.joueur) win = true; //top lane
-				else if(grille[4].getJoueur() == ModeleMorpion.joueur && grille[6].getJoueur() == ModeleMorpion.joueur) win = true; //slash
-				else if(grille[5].getJoueur() == ModeleMorpion.joueur && grille[8].getJoueur() == ModeleMorpion.joueur) win = true; //right col
-				break;
-				
-			case 3:
-				     if(grille[4].getJoueur() == ModeleMorpion.joueur && grille[5].getJoueur() == ModeleMorpion.joueur) win = true; //mid lane
-				else if(grille[0].getJoueur() == ModeleMorpion.joueur && grille[6].getJoueur() == ModeleMorpion.joueur) win = true; //left col
-			    break;
-				
-			case 4:
-					 if(grille[3].getJoueur() == ModeleMorpion.joueur && grille[5].getJoueur() == ModeleMorpion.joueur) win = true; //mid lane
-				else if(grille[1].getJoueur() == ModeleMorpion.joueur && grille[7].getJoueur() == ModeleMorpion.joueur) win = true; //mid col
-				else if(grille[0].getJoueur() == ModeleMorpion.joueur && grille[8].getJoueur() == ModeleMorpion.joueur) win = true; //antislash
-				else if(grille[2].getJoueur() == ModeleMorpion.joueur && grille[6].getJoueur() == ModeleMorpion.joueur) win = true; //slash
-				break;
-				
-			case 5:
-					 if(grille[3].getJoueur() == ModeleMorpion.joueur && grille[4].getJoueur() == ModeleMorpion.joueur) win = true; //mid lane
-				else if(grille[2].getJoueur() == ModeleMorpion.joueur && grille[8].getJoueur() == ModeleMorpion.joueur) win = true; //right col
-				break;
-				
-			case 6:
-				     if(grille[7].getJoueur() == ModeleMorpion.joueur && grille[8].getJoueur() == ModeleMorpion.joueur) win = true; //bot lane
-			    else if(grille[0].getJoueur() == ModeleMorpion.joueur && grille[3].getJoueur() == ModeleMorpion.joueur) win = true; //left col
-			    else if(grille[4].getJoueur() == ModeleMorpion.joueur && grille[2].getJoueur() == ModeleMorpion.joueur) win = true; //slash
-				break;
-				
-			case 7:
-			         if(grille[6].getJoueur() == ModeleMorpion.joueur && grille[8].getJoueur() == ModeleMorpion.joueur) win = true; //bot lane
-				else if(grille[1].getJoueur() == ModeleMorpion.joueur && grille[4].getJoueur() == ModeleMorpion.joueur) win = true; //mid col
-				break;
-				
-			case 8:     
-					 if(grille[6].getJoueur() == ModeleMorpion.joueur && grille[7].getJoueur() == ModeleMorpion.joueur) win = true; //bot lane
-				else if(grille[2].getJoueur() == ModeleMorpion.joueur && grille[5].getJoueur() == ModeleMorpion.joueur) win = true; //right col
-				else if(grille[4].getJoueur() == ModeleMorpion.joueur && grille[0].getJoueur() == ModeleMorpion.joueur) win = true; //antislash
-				break;
-		}
-		return win;
-	}	
+	    boolean win = false;
+
+	    // En fonction de quel bouton vient d'être cliqué, check les possibilités des wins possibles
+	    switch(boutonPos) {
+	        case 0:
+	            	 if (checkLigne(1, 2, grille, ModeleMorpion.getJoueur())) win = true; //top lane
+	            else if (checkLigne(3, 6, grille, ModeleMorpion.getJoueur())) win = true; //left col
+	            else if (checkLigne(4, 8, grille, ModeleMorpion.getJoueur())) win = true; //antislash
+	            break;
+
+	        case 1:
+	            	 if (checkLigne(0, 2, grille, ModeleMorpion.getJoueur())) win = true; //top lane
+	            else if (checkLigne(4, 7, grille, ModeleMorpion.getJoueur())) win = true; //mid col
+	            break;
+
+	        case 2:
+	            	 if (checkLigne(0, 1, grille, ModeleMorpion.getJoueur())) win = true; //top lane
+	            else if (checkLigne(4, 6, grille, ModeleMorpion.getJoueur())) win = true; //slash
+	            else if (checkLigne(5, 8, grille, ModeleMorpion.getJoueur())) win = true; //right col
+	            break;
+
+	        case 3:
+	            	 if (checkLigne(4, 5, grille, ModeleMorpion.getJoueur())) win = true; //mid lane
+	            else if (checkLigne(0, 6, grille, ModeleMorpion.getJoueur())) win = true; //left col
+	            break;
+
+	        case 4:
+	            	 if (checkLigne(3, 5, grille, ModeleMorpion.getJoueur())) win = true; //mid lane
+	            else if (checkLigne(1, 7, grille, ModeleMorpion.getJoueur())) win = true; //mid col
+	            else if (checkLigne(0, 8, grille, ModeleMorpion.getJoueur())) win = true; //antislash
+	            else if (checkLigne(2, 6, grille, ModeleMorpion.getJoueur())) win = true; //slash
+	            break;
+
+	        case 5:
+	            	 if (checkLigne(3, 4, grille, ModeleMorpion.getJoueur())) win = true; //mid lane
+	            else if (checkLigne(2, 8, grille, ModeleMorpion.getJoueur())) win = true; //right col
+	            break;
+
+	        case 6:
+	            	 if (checkLigne(7, 8, grille, ModeleMorpion.getJoueur())) win = true; //bot lane
+	            else if (checkLigne(0, 3, grille, ModeleMorpion.getJoueur())) win = true; //left col
+	            else if (checkLigne(4, 2, grille, ModeleMorpion.getJoueur())) win = true; //slash
+	            break;
+
+	        case 7:
+	            	 if (checkLigne(6, 8, grille, ModeleMorpion.getJoueur())) win = true; //bot lane
+	            else if (checkLigne(1, 4, grille, ModeleMorpion.getJoueur())) win = true; //mid col
+	            break;
+
+	        case 8:
+	            	 if (checkLigne(6, 7, grille, ModeleMorpion.getJoueur())) win = true; //bot lane
+	            else if (checkLigne(2, 5, grille, ModeleMorpion.getJoueur())) win = true; //right col
+	            else if (checkLigne(4, 0, grille, ModeleMorpion.getJoueur())) win = true; //antislash
+	            break;
+	    }
+	    return win;
+	}
+
+	// Regarde si le joueur à 3 symboles alignés
+	private static boolean checkLigne(int x, int y, BoutonMorpion[] grille, Joueur j) {
+	    return grille[x].getJoueur() == j && grille[y].getJoueur() == j;
+	}
 	
 	
 	
