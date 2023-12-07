@@ -14,8 +14,5 @@ public class main {
 			vues[i] = frame;
 		}
 		new MegaControleur(vues);
-		
-		// test focus
-		MegaControleur.forceFocus(5);
 	}
 }

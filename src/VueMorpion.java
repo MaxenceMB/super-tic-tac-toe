@@ -11,6 +11,7 @@ import javax.swing.JButton;
 public class VueMorpion extends JFrame {
 	
 	private BoutonMorpion[] boutons = new BoutonMorpion[9];
+	private boolean libre;
 
 	public VueMorpion(int posX, int posY, String title) {
 		
@@ -21,6 +22,7 @@ public class VueMorpion extends JFrame {
 		setResizable(false);
 		
 		ControleurMorpion controleur = new ControleurMorpion(this);
+		this.libre = true;
 		
 		// Pannel principal (grid 3x3)
 		JPanel contentPane = new JPanel();
@@ -38,7 +40,7 @@ public class VueMorpion extends JFrame {
 		focus();
 	}
 	
-	public void noFocus() {
+	public void unfocus() {
 		for(int i = 0; i < 9; i++) {
 			this.boutons[i].setBackground(Color.LIGHT_GRAY);
 		}
@@ -55,6 +57,8 @@ public class VueMorpion extends JFrame {
 		for(int i = 0; i < 9; i++) {
 			boutons[i].setIcon(new ImageIcon(ModeleMorpion.class.getResource(path+i+".png")));
 		}
+		
+		this.libre = false;
 	}
 
 	public boolean estVide(JButton bouton) {
@@ -65,11 +69,15 @@ public class VueMorpion extends JFrame {
 		}
 	}
 	
-	public BoutonMorpion[] getButtons() {
+	public boolean estLibre() {
+		return this.libre;
+	}
+	
+	public BoutonMorpion[] getBoutons() {
 		return this.boutons;
 	}
 	
-	public void setButton(BoutonMorpion bouton) {
+	public void setBouton(BoutonMorpion bouton) {
 		this.boutons[bouton.getPos()] = bouton;
 	}
 }

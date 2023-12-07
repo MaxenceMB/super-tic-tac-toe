@@ -8,14 +8,24 @@ public class MegaControleur {
 	}
 	
 	public static void forceFocus(int index) {
-		vues[index].setEnabled(true);
-		vues[index].focus();
-		for(int i = 0; i < 9; i++) {
-			if(i != index) {
-				vues[i].setEnabled(false);
-				vues[i].noFocus();
+		if(vues[index].estLibre()) {
+			vues[index].setEnabled(true);
+			vues[index].focus();
+			for(int i = 0; i < 9; i++) {
+				if(i != index) {
+					vues[i].setEnabled(false);
+					vues[i].unfocus();
+				}
+			}
+		} else {
+			for(int i = 0; i < 9; i++) {
+				if(vues[i].estLibre()) {
+					vues[i].setEnabled(true);
+					vues[i].focus();
+				}
 			}
 		}
+		
 	}
 
 }

@@ -11,25 +11,25 @@ public class ControleurMorpion implements ActionListener {
 
 	public ControleurMorpion(VueMorpion vue) {
 		this.vue  = vue;
-		this.etat = Etat.JEU_LIBRE;
+		this.etat = Etat.JEU;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		BoutonMorpion bouton = (BoutonMorpion)e.getSource();
 		switch(this.etat) {
-			case JEU_LIBRE:
+			case JEU:
 				if(vue.estVide(bouton)) {
-					bouton.setIcon(ModeleMorpion.getPlayerIcon(ModeleMorpion.getJoueur()));
+					bouton.setIcon(ModeleMorpion.getIconJoueur(ModeleMorpion.getJoueur()));
 					bouton.setJoueur(ModeleMorpion.getJoueur());
-					vue.setButton(bouton);
+					vue.setBouton(bouton);
 					
 					MegaControleur.forceFocus(bouton.getPos());
 				}
 				
-				if(ModeleMorpion.checkWin(vue.getButtons(), bouton.getPos())) {
+				if(ModeleMorpion.checkWin(vue.getBoutons(), bouton.getPos())) {
 					this.etat = Etat.FIN;
-					ModeleMorpion.win(ModeleMorpion.getJoueur());
+					ModeleMorpion.victoire(ModeleMorpion.getJoueur());
 					vue.finPartie(ModeleMorpion.getJoueur());
 				}
 				ModeleMorpion.nextJoueur();

@@ -1,2 +1,2 @@
 
-public enum Etat { JEU_LIBRE, FIN };
+public enum Etat { JEU, FIN };

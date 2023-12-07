@@ -12,8 +12,7 @@ public class ModeleMorpion {
 	
 	// Jeu
 	public static boolean checkWin(BoutonMorpion[] grille, int boutonPos) {
-		boolean   win = false;
-		ImageIcon ico = getPlayerIcon(joueur);
+		boolean win = false;
 		
 		switch(boutonPos) {
 			case 0:				
@@ -71,7 +70,7 @@ public class ModeleMorpion {
 	}
 	
 	
-	public static void win(Joueur j) {
+	public static void victoire(Joueur j) {
 		System.out.println("PARTIE GAGNÉE PAR LE JOUEUR " + j.toString());
 	}
 	
@@ -91,7 +90,7 @@ public class ModeleMorpion {
 	}
 	
 	
-	public static ImageIcon getPlayerIcon(Joueur j) {
+	public static ImageIcon getIconJoueur(Joueur j) {
 		switch(j) {
 			case O:
 				return new ImageIcon(ModeleMorpion.class.getResource("/icons/player_o.png"));
