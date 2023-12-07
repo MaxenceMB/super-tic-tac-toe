@@ -1,6 +1,8 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import java.awt.Color;
 import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
@@ -31,6 +33,20 @@ public class VueMorpion extends JFrame {
 		    boutons[i] = new BoutonMorpion(i);
 		    boutons[i].addActionListener(controleur);
 		    contentPane.add(boutons[i]);
+		}
+		
+		focus();
+	}
+	
+	public void noFocus() {
+		for(int i = 0; i < 9; i++) {
+			this.boutons[i].setBackground(Color.LIGHT_GRAY);
+		}
+	}
+	
+	public void focus() {
+		for(int i = 0; i < 9; i++) {
+			this.boutons[i].setBackground(Color.WHITE);
 		}
 	}
 	

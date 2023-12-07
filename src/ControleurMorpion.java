@@ -23,6 +23,8 @@ public class ControleurMorpion implements ActionListener {
 					bouton.setIcon(ModeleMorpion.getPlayerIcon(ModeleMorpion.getJoueur()));
 					bouton.setJoueur(ModeleMorpion.getJoueur());
 					vue.setButton(bouton);
+					
+					MegaControleur.forceFocus(bouton.getPos());
 				}
 				
 				if(ModeleMorpion.checkWin(vue.getButtons(), bouton.getPos())) {
