@@ -1,26 +1,26 @@
 
 public class MegaControleur {
 	
-	private static VueMorpion[] vues = new VueMorpion[9]; // Liste des fenêtres
-	private static int vueCourante = -1;                  // Fenêtre courante
+	private static ControleurMorpion[] jeux = new ControleurMorpion[9]; // Liste des fenêtres
+	private static int vueCourante = -1;                                // Fenêtre courante
 	
-	public MegaControleur(VueMorpion[] fenetres) {
-		vues = fenetres;
+	public MegaControleur(ControleurMorpion[] controleurs) {
+		jeux = controleurs;
 	}
 	
 	// Force le focus sur la fenêtre souhaitée, si on peut pas, permet de jouer partout
 	public static void forceFocus(int index) {
-		if(vues[index].estLibre()) {
-			vues[index].focus();
+		if(jeux[index].estLibre()) {
+			jeux[index].focus();
 			for(int i = 0; i < 9; i++) {
 				if(i != index) {
-					vues[i].unfocus();
+					jeux[i].unfocus();
 				}
 			}
 		} else {
 			for(int i = 0; i < 9; i++) {
-				if(vues[i].estLibre()) {
-					vues[i].focus();
+				if(jeux[i].estLibre()) {
+					jeux[i].focus();
 				}
 			}
 		}
@@ -88,13 +88,13 @@ public class MegaControleur {
 	
 	// Regarde si le joueur à 3 parties gagnées alignées
 	private static boolean checkLigne(int case1, int case2, Joueur j) {
-		return vues[case1].getVainqueur() == j && vues[case2].getVainqueur() == j;
+		return jeux[case1].getVainqueur() == j && jeux[case2].getVainqueur() == j;
 	}
 	
 	// La vrai win sa mère
 	public static void bigWin() {
 		for(int i = 0; i < 9; i++) {
-			vues[i].dispose();
+			jeux[i].unfocus();
 		}
 	}
 
