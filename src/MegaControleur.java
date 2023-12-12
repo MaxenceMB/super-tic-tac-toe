@@ -2,10 +2,17 @@
 public class MegaControleur {
 	
 	private static ControleurMorpion[] jeux = new ControleurMorpion[9]; // Liste des fenêtres
+	private static VueGameMaster master;								// VueGameMaster
 	private static int vueCourante = -1;                                // Fenêtre courante
 	
-	public MegaControleur(ControleurMorpion[] controleurs) {
-		jeux = controleurs;
+	public MegaControleur(ControleurMorpion[] controleurs, VueGameMaster vueMaster) {
+		jeux   = controleurs;
+		master = vueMaster;
+	}
+	
+	// Update le joueur actif du jeu dans la fenetre GameMaster
+	public static void updateMasterJoueur(Joueur j) {
+		master.setJoueurActif(j);
 	}
 	
 	// Force le focus sur la fenêtre souhaitée, si on peut pas, permet de jouer partout

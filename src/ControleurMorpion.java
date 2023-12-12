@@ -11,13 +11,15 @@ public class ControleurMorpion implements ActionListener {
 	private boolean libre;
 	private Joueur  vainqueur;
 	private int     id;
+	private int     coups;
 	
 	public ControleurMorpion(VueMorpion vue, int id) {
 		this.vue  = vue;
+		this.id        = id;
 
 		this.libre     = true;
 		this.vainqueur = Joueur.NONE;
-		this.id        = id;
+		this.coups     = 0;
 	}
 	
 	@Override
@@ -31,6 +33,8 @@ public class ControleurMorpion implements ActionListener {
 		if(vue.estVide(bouton)) {
 			bouton.setJoueur(joueur);  // On associe le joueur à la case
 			vue.setBouton(bouton);	   // On raffraichit la liste des boutons de la fenêtre
+			
+			this.coups++;
 		}
 		
 		// On check si le joueur vient de gagner
@@ -46,6 +50,8 @@ public class ControleurMorpion implements ActionListener {
 			} else {
 				peutJouer = true;         // Sinon on peut continuer
 			}
+		} else if(this.coups == 9) {
+			finPartie(Joueur.NONE);
 		}
 		
 		// Si on peut jouer
@@ -73,10 +79,17 @@ public class ControleurMorpion implements ActionListener {
 	
 	// Affiche en gros le vainqueur
 	public void finPartie(Joueur j) {
-		String path = String.format("/icons/%s_win/", j.toString().toLowerCase());
-		for(int i = 0; i < 9; i++) {
-			this.vue.getBoutons()[i].setIcon(new ImageIcon(ModeleMorpion.class.getResource(path+i+".png")));
+		if(j == Joueur.NONE) {
+			for(int i = 0; i < 9; i++) {
+				this.vue.getBoutons()[i].setBackground(Color.GRAY);
+			}
+		} else {
+			String path = String.format("/icons/%s_win/", j.toString().toLowerCase());
+			for(int i = 0; i < 9; i++) {
+				this.vue.getBoutons()[i].setIcon(new ImageIcon(ModeleMorpion.class.getResource(path+i+".png")));
+			}
 		}
+		this.libre = false;
 		unfocus();
 	}
 	

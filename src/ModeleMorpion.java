@@ -118,6 +118,13 @@ public class ModeleMorpion {
 		Object[] infos = new Object[3];
 		
 		switch(pos) {
+			case -1:
+				infos[0] = ecranLargeur/2 - 950;
+				infos[1] = ecranHauteur/2 - 456;
+			
+				infos[2] = "SUPER TIC-TAC-TOE!";
+				break;
+				
 			case 0:
 				infos[0] = ecranLargeur/2 - 450;
 				infos[1] = ecranHauteur/2 - 456;
@@ -182,8 +189,8 @@ public class ModeleMorpion {
 				break;
 				
 			default:
-				infos[0] = 10;
-				infos[1] = 10;
+				infos[0] = 0;
+				infos[1] = 0;
 				
 				infos[2] = "X";
 		}
