@@ -13,21 +13,30 @@ public class ControleurMorpion implements ActionListener {
 	private int     id;
 	private int     coups;
 	
+	private MegaControleur mega;
+	private ModeleMorpion  modele;
+	
+	
 	public ControleurMorpion(VueMorpion vue, int id) {
-		this.vue  = vue;
+		this.vue       = vue;
 		this.id        = id;
 
 		this.libre     = true;
 		this.vainqueur = Joueur.NONE;
 		this.coups     = 0;
+		
+		this.modele = ModeleMorpion.getInstance();
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		MegaControleur.setCourant(getId());				         // Assigne la fenêtre courante à celle qu'on vient de cliquer
-		BoutonMorpion bouton    = (BoutonMorpion)e.getSource();  // Récupère le bouton source de l'action
-		boolean       peutJouer = true;						     // Permet de controler la fin du jeu
-		Joueur        joueur    = ModeleMorpion.getJoueur();     // Récupère le joueur qui vient de jouer
+		
+		if(this.mega == null) this.mega = MegaControleur.getInstance();
+		
+		this.mega.setCourant(getId());		                    // Assigne la fenêtre courante à celle qu'on vient de cliquer
+		BoutonMorpion bouton    = (BoutonMorpion)e.getSource(); // Récupère le bouton source de l'action
+		boolean       peutJouer = true;						    // Permet de controler la fin du jeu
+		Joueur        joueur    = this.modele.getJoueur();		// Récupère le joueur qui vient de jouer
 		
 		// Si le bouton est vide (pas encore joué ici)
 		if(vue.estVide(bouton)) {
@@ -38,15 +47,15 @@ public class ControleurMorpion implements ActionListener {
 		}
 		
 		// On check si le joueur vient de gagner
-		if(ModeleMorpion.checkVictoire(vue.getBoutons(), bouton.getPos())) {
+		if(modele.checkVictoire(vue.getBoutons(), bouton.getPos())) {
 			finPartie(joueur);       // Si c'est le cas, gg, on affiche sa victoire
 			this.libre = false;      // La fenêtre n'est plus jouable
 			this.vainqueur = joueur; // Associe le vainqueur
 			
 			// On check si sa victoire lui a fait gagner le jeu entier
-			if(MegaControleur.checkVictoire(getId())) {
+			if(this.mega.checkVictoire(getId())) {
 				peutJouer = false;        // Si c'est le cas, on stop tout
-				MegaControleur.bigWin();  // Big big win, gros gg
+				MegaControleur.getInstance().bigWin();  // Big big win, gros gg
 			} else {
 				peutJouer = true;         // Sinon on peut continuer
 			}
@@ -56,8 +65,8 @@ public class ControleurMorpion implements ActionListener {
 		
 		// Si on peut jouer
 		if (peutJouer) {
-			MegaControleur.forceFocus(bouton.getPos());  // On force le jeu dans la fenêtre correspondante
-			ModeleMorpion.nextJoueur();                  // On passe au joueur suivant
+			this.mega.forceFocus(bouton.getPos());  // On force le jeu dans la fenêtre correspondante
+			this.modele.nextJoueur();               // On passe au joueur suivant
 		}
 	}
 	

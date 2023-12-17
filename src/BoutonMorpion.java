@@ -25,7 +25,7 @@ public class BoutonMorpion extends JButton {
 	
 	// Associe un joueur (icon + joueur)
 	public void setJoueur(Joueur j) {
-		this.setIcon(ModeleMorpion.getIconJoueur(j)); 
+		this.setIcon(ModeleMorpion.getInstance().getIconJoueur(j)); 
 		this.joueur = j;
 	}
 	

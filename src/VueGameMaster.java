@@ -20,12 +20,14 @@ public class VueGameMaster extends JFrame {
 		setTitle(title);
 		setResizable(false);
 		
+		ControleurMaster controleur = new ControleurMaster();
+		
 		// Pannel principal (grid 3x3)
 		JPanel contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 		
 		JPanel panelTop = new JPanel();
 		contentPane.add(panelTop, BorderLayout.NORTH);
@@ -36,15 +38,17 @@ public class VueGameMaster extends JFrame {
 		
 		JPanel panelBot = new JPanel();
 		panelBot.setBorder(new EmptyBorder(0, 20, 0, 20));
-		contentPane.add(panelBot, BorderLayout.SOUTH);
 		panelBot.setLayout(new GridLayout(0, 2, 5, 0));
+		contentPane.add(panelBot, BorderLayout.SOUTH);
 		
 		JButton btnRecommencer = new JButton("Recommencer");
 		btnRecommencer.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnRecommencer.addActionListener(controleur);
 		panelBot.add(btnRecommencer);
 		
 		JButton btnQuitter = new JButton("Quitter");
 		btnQuitter.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnQuitter.addActionListener(controleur);
 		panelBot.add(btnQuitter);
 	}
 	
