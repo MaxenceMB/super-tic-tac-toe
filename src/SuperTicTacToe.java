@@ -10,6 +10,10 @@ public class SuperTicTacToe {
 	 */
 	public static void main(String[] args) {
 		ModeleMorpion.getTailleEcran(); // Récupère les infos de l'écran pour tout placer correctement
+
+		// Créé la fenêtre master
+		VueGameMaster gm = new VueGameMaster((int)ModeleMorpion.getInfos(-1)[0], (int)ModeleMorpion.getInfos(-1)[1], (String)ModeleMorpion.getInfos(-1)[2]);
+		gm.setVisible(true);
 		
 		// Créé les 9 fenêtres du jeu et les envoie au MegaControleur
 		ControleurMorpion[] controleurs = new ControleurMorpion[9];
@@ -22,10 +26,7 @@ public class SuperTicTacToe {
 			controleurs[i] = frame.getControleur();
 		}
 		
-		// Vue master du jeu
-		VueGameMaster gm = new VueGameMaster((int)ModeleMorpion.getInfos(-1)[0], (int)ModeleMorpion.getInfos(-1)[1], (String)ModeleMorpion.getInfos(-1)[2]);
-		gm.setVisible(true);
-		
+		// Lance le setup du controleur
 		MegaControleur.setup(controleurs, gm);
 	}
 }

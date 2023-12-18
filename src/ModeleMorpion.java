@@ -95,6 +95,11 @@ public class ModeleMorpion {
 		return this.joueur;
 	}
 	
+	// Assigne le joueur
+	public void setJoueur(Joueur j) {
+		this.joueur = j;
+	}
+	
 	// Passe au joueur suivant
 	public void nextJoueur() {
 		this.joueur = (this.joueur == Joueur.O) ? Joueur.X: Joueur.O; // Si le joueur actuel est O, on passe à X et inversement

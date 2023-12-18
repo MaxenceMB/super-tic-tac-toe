@@ -119,6 +119,23 @@ public class MegaControleur {
 			jeux[i].unfocus();
 		}
 	}
+	
+	// Remet tout à 0
+	public void recommencer() {
+		for(int i = 0; i < 9; i++) {
+			jeux[i].getVue().reset();
+			jeux[i].focus();
+		}
+		ModeleMorpion.getInstance().setJoueur(Joueur.O);
+	}
+	
+	// Remet tout à 0
+	public void quitter() {
+		for(int i = 0; i < 9; i++) {
+			jeux[i].getVue().dispose();
+		}
+		master.dispose();
+	}
 
 	// Renvoie l'id de la fenêtre courante
 	public int getCourant() {

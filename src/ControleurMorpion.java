@@ -116,4 +116,9 @@ public class ControleurMorpion implements ActionListener {
 	public int getId() {
 		return this.id;
 	}
+	
+	// Renvoie la fenêtre associée
+	public VueMorpion getVue() {
+		return this.vue;
+	}
 }

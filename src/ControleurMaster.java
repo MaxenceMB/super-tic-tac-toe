@@ -10,9 +10,9 @@ public class ControleurMaster implements ActionListener {
 		JButton b = (JButton) e.getSource();
 		
 		if(b.getText().equals("Recommencer")) {
-			System.out.println("Recommencer");
+			MegaControleur.getInstance().recommencer();
 		} else if(b.getText().equals("Quitter")) {
-			System.out.println("Quitter");
+			MegaControleur.getInstance().quitter();
 		}
 	}
 

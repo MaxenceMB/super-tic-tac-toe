@@ -55,4 +55,12 @@ public class VueMorpion extends JFrame {
 	public ControleurMorpion getControleur() {
 		return this.controleur;
 	}
+	
+	// Remet tout à 0
+	public void reset() {
+		for(int i = 0; i < 9; i++) {
+			this.boutons[i].setJoueur(Joueur.NONE);
+			this.boutons[i].setIcon(null);
+		}
+	}
 }
